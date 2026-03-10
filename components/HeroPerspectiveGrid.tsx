@@ -94,7 +94,7 @@ export default function HeroPerspectiveGrid() {
             for (let i = 1; i < NUM_R; i++)
                 endpoints.push([W, i / NUM_R * H]);
 
-            endpoints.forEach(([endX, endY], idx) => {
+            endpoints.forEach(([endX, endY]) => {
                 // Distance of endpoint from VP as fraction — centre lines first
                 const dx = endX - vx, dy = endY - vy;
                 const angle = Math.atan2(dy, dx); // -π to π
@@ -106,10 +106,6 @@ export default function HeroPerspectiveGrid() {
 
                 const toX = vx + (endX - vx) * lineProg * scrollFade;
                 const toY = vy + (endY - vy) * lineProg * scrollFade;
-
-                const dist  = Math.hypot(dx, dy);
-                const distW = Math.hypot(W / 2, H / 2);
-                const t     = dist / distW; // 0=near VP, 1=far corner
 
                 const grad = ctx.createLinearGradient(vx, vy, endX, endY);
                 grad.addColorStop(0,    `rgba(${PRIMARY}, 0)`);
