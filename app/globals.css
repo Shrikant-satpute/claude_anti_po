@@ -2,26 +2,92 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #f8f9fa;
+    --primary: #6C63FF;
+    --secondary: #0088cc;
+    --tertiary: #9D4EDD;
+
+    --foreground: #0f172a;
+    --muted: #475569;
   }
 }
 
+html,
 body {
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  /* Soft off-white gradient */
+  background: radial-gradient(circle at 50% 0%, #ffffff 0%, #f8f9fa 50%, #f1f5f9 100%);
+  background-attachment: fixed;
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
+  cursor: none;
+  /* We will use a custom cursor */
 }
 
+/* Custom Selection */
+::selection {
+  background-color: rgba(108, 99, 255, 0.3);
+  color: #fff;
+}
+
+/* Glassmorphism Utilities */
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .glass {
+    @apply bg-white/60 backdrop-blur-xl border border-white/80 shadow-[0_4px_24px_-8px_#0000001a];
+  }
+
+  .glass-card {
+    @apply glass rounded-2xl shadow-[0_8px_32px_-8px_#00000026];
+  }
+
+  .text-glow-primary {
+    text-shadow: 0 0 15px rgba(108, 99, 255, 0.5);
+  }
+
+  .text-glow-secondary {
+    text-shadow: 0 0 15px rgba(0, 245, 255, 0.5);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Base interactive transitions */
+a,
+button {
+  @apply transition-all duration-200 ease-out;
+}
+
+/* Disable Custom Cursor on Touch Devices */
+@media (max-width: 768px) {
+  body {
+    cursor: auto;
+  }
+}
+
+@keyframes shimmer {
+  0%   { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
