@@ -84,7 +84,7 @@ export function retrieveContext(query: string): string {
 
     // If asking about projects broadly, return all project chunks
     const projectWords = ['project', 'projects', 'built', 'worked', 'made', 'created', 'developed', 'build'];
-    const isProjectQuery = [...queryTokens].some(t => projectWords.includes(t));
+    const isProjectQuery = Array.from(queryTokens).some(t => projectWords.includes(t));
     if (isProjectQuery) {
         return CHUNKS
             .filter(c => c.category === 'Project')
