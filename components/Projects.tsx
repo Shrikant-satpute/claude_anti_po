@@ -5,6 +5,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { PROJECTS } from '@/lib/constants';
 import { Layers } from 'lucide-react';
+import { FloatingPaths } from '@/components/ui/background-paths';
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
@@ -45,9 +46,14 @@ export default function Projects() {
     return (
         <section
             ref={sectionRef}
-            className="relative overflow-hidden py-24 lg:py-0 lg:h-screen flex flex-col justify-center"
-            style={{ background: '#f5f500' }}
+            className="relative overflow-hidden py-24 lg:py-0 lg:h-screen flex flex-col justify-center bg-white dark:bg-neutral-950"
         >
+            {/* Floating paths background */}
+            <div className="absolute inset-0 z-0">
+                <FloatingPaths position={1} />
+                <FloatingPaths position={-1} />
+            </div>
+
             {/* Header */}
             <div className="container mx-auto px-6 mb-12 lg:mb-20 relative z-10">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-space" style={{ color: '#0a0a0a' }}>
